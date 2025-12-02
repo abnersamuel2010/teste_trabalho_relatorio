@@ -1,0 +1,432 @@
+const assentosSelecionados = [];
+const ingressosSelecionados = [];
+const horariosSelecionada = [];
+const comidaSelecionada = [];
+const bebidaSelecionada = [];
+const comboSelecionado = [];
+
+const letras = [
+    { id: "A", nome: "A" },
+    { id: "B", nome: "B" },
+    { id: "C", nome: "C" },
+    { id: "D", nome: "D" },
+    { id: "E", nome: "E" },
+    { id: "F", nome: "F" },
+    { id: "G", nome: "G" },
+    { id: "H", nome: "H" },
+]
+const numeros = [
+    { id: "1", nome: "1" },
+    { id: "2", nome: "2" },
+    { id: "3", nome: "3" },
+    { id: "4", nome: "4" },
+    { id: "5", nome: "5" },
+    { id: "6", nome: "6" },
+    { id: "7", nome: "7" },
+    { id: "8", nome: "8" },
+    { id: "9", nome: "9" },
+]
+const categoria = [
+    { id: "Nenhum", nome: "Nenhum" },
+    { id: "Terror", nome: "Terror👻" },
+    { id: "Aventura", nome: "Aventura🗺️" },
+    { id: "Romance", nome: "Romance❤️" },
+    { id: "Comedia", nome: "Comédia🤣" },
+    { id: "Drama", nome: "Drama🌹" },
+    { id: "Acao", nome: "Ação🥊" },
+]
+
+const Filmesterror = [
+    { id: "Terrifier", nome: "Terrifier" },
+    { id: "Hora do Pesadelo", nome: "Hora do Pesadelo" },
+    { id: "Sextafeira 13", nome: "Sextafeira 13" },
+]
+
+const Filmesaventura = [
+    { id: "Jumanji", nome: "Jumanji" },
+    { id: "Vingadores", nome: "Vingadores" },
+    { id: "Velozes e Furiosos", nome: "Velozes e Furiosos" },
+]
+
+const Filmesromance = [
+    { id: "Titanic", nome: "Titanic" },
+    { id: "Como eu era antes de você", nome: "Como eu era antes de você" },
+    { id: "10 coisas que eu odeio você", nome: "10 coisas que eu odeio você" },
+]
+
+const Filmescomedia = [
+    { id: "Um maluco no golf", nome: "Um maluco no golf" },
+    { id: "De repente trinta", nome: "De repente trinta" },
+    { id: "Gente grande", nome: "Gente grande" },
+]
+
+const Filmesdrama = [
+    { id: "Culpa das estrelas", nome: "Culpa das estrelas" },
+    { id: "Show de truman", nome: "Show de truman" },
+    { id: "Interestelar", nome: "Interestelar" },
+]
+const Filmesacao = [
+    { id: "Formula 1", nome: "Formula 1" },
+    { id: "Quarteto Fantástico", nome: "Quarteto Fantástico" },
+    { id: "Superman", nome: "Superman" },
+]
+const comida = [
+    { id: "nenhuma", nome: "Nenhuma", preco: 0 },
+    { id: "cb", nome: "Cachorro Quente🌭 - 14,99R$", preco: 14.99 },
+    { id: "pp", nome: "Pipoca Pequena🍿 - 9,99R$", preco: 9.99 },
+    { id: "pm", nome: "Pipoca Média🍿 - 19,99R$", preco: 19.99 },
+    { id: "pg", nome: "Pipoca Grande🍿 - 29,99R$", preco: 29.99 },
+    { id: "pgg", nome: "Pipoca Gigante🍿 - 39,99R$", preco: 39.99 },
+]
+const bebida = [
+    { id: "nenhuma", nome: "Nenhuma", preco: 0 },
+    { id: "cc", nome: "Coca-Cola🥤 - 11,99R$", preco: 11.99 },
+    { id: "pp", nome: "Pepsi🥤 - 11,99R$", preco: 11.99 },
+    { id: "gr", nome: "Guaraná🥤 - 11,99R$", preco: 11.99 },
+]
+
+const combo = [
+    { id: "nenhuma", nome: "Nenhuma", preco: 0 },
+    { id: "Combo Classic", nome: "Pipoca Grande(salgada) + Refrigerante(350ml) - 49,99R$", preco: 49.99 },
+    { id: "Combo classic Duo", nome: "Pipoca Gigante(salgada ou doce) + Refil + 2 Refrigerante - 69,99R$", preco: 69.99 },
+    { id: "Combo Classic Prime", nome: "Pipoca Grande(salgada ou doce) + Balde/Copo personalizado(Copo Refil) - 99,99R$", preco: 99.99 },
+    { id: "Combo Classic Supremo ", nome: "Balde Gigante personalizado(Refil) (salgada ou doce) + Copo Personalizado - 119,99R$ ", preco: 119.99 },
+]
+const ingressos = [
+    { id: "inteira", nome: "Inteira - 24,99R$", preco: 24.99 },
+    { id: "meia", nome: "Meia-Entrada - 11,99R$", preco: 11.99 },
+]
+
+const horarios = [
+    { id: "11:00", nome: "11:00" },
+    { id: "13:30", nome: "13:30" },
+    { id: "16:00", nome: "16:00" },
+    { id: "18:30", nome: "18:30" },
+    { id: "21:00", nome: "21:00" },
+]
+
+function preencherOpcoes() {
+    const selectingressos = document.getElementById("ingressos");
+        for (let i = 0; i < ingressos.length; i++) {
+        const item = ingressos[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selectingressos.appendChild(option);
+    }
+    const selectnumeros = document.getElementById("numeros");
+    for (let i = 0; i < numeros.length; i++) {
+        const item = numeros[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selectnumeros.appendChild(option);
+    }
+    const selectletras = document.getElementById("letras");
+    for (let i = 0; i < letras.length; i++) {
+        const item = letras[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selectletras.appendChild(option);
+    }
+    const selectcategoria = document.getElementById("categoria");
+    for (let i = 0; i < categoria.length; i++) {
+        const item = categoria[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selectcategoria.appendChild(option);
+    }
+    const selectcomida = document.getElementById("comida");
+    for (let i = 0; i < comida.length; i++) {
+        const item = comida[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selectcomida.appendChild(option);
+    }
+    const selectbebida = document.getElementById("bebida");
+    for (let i = 0; i < bebida.length; i++) {
+        const item = bebida[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selectbebida.appendChild(option);
+    }
+    const selectcombo = document.getElementById("combo");
+    for (let i = 0; i < combo.length; i++) {
+        const item = combo[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selectcombo.appendChild(option);
+    }
+    const selecthorario = document.getElementById("horario");
+    for (let i = 0; i < horarios.length; i++) {
+        const item = horarios[i];
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.nome;
+        selecthorario.appendChild(option);
+    }
+}
+
+function gerarCategoria() {
+
+    const categoriaSelecionada = document.getElementById("categoria").value;
+
+    if (categoriaSelecionada == "Terror") {
+        const categoriaHTML = `
+            <label>
+            <select id="Filmesterror"></select>
+            </label>
+            <br>
+            <button type="button" onclick="adicionarTerror()">Adicionar</button>
+
+`;
+        document.getElementById("mostrarcategoria").innerHTML = categoriaHTML;
+
+        const selectFilmesterror = document.getElementById("Filmesterror");
+        for (let i = 0; i < Filmesterror.length; i++) {
+            const item = Filmesterror[i];
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.textContent = item.nome;
+            selectFilmesterror.appendChild(option);
+        }
+    }
+    if (categoriaSelecionada == "Aventura") {
+        const categoriaHTML = `
+            <label>
+            <select id="Filmesaventura"></select>
+            </label>
+            <br>
+            <button type="button" onclick="adicionarAventura()">Adicionar</button>
+
+`;
+        document.getElementById("mostrarcategoria").innerHTML = categoriaHTML;
+
+        const selectFilmesaventura = document.getElementById("Filmesaventura");
+        for (let i = 0; i < Filmesaventura.length; i++) {
+            const item = Filmesaventura[i];
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.textContent = item.nome;
+            selectFilmesaventura.appendChild(option);
+        }
+    }
+    if (categoriaSelecionada == "Romance") {
+        const categoriaHTML = `
+            <label>
+            <select id="Filmesromance"></select>
+            </label>
+            <br>
+            <button type="button" onclick="adicionarRomance()">Adicionar</button>
+
+`;
+        document.getElementById("mostrarcategoria").innerHTML = categoriaHTML;
+
+        const selectFilmesromance = document.getElementById("Filmesromance");
+        for (let i = 0; i < Filmesromance.length; i++) {
+            const item = Filmesromance[i];
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.textContent = item.nome;
+            selectFilmesromance.appendChild(option);
+        }
+    }
+    if (categoriaSelecionada == "Comedia") {
+        const categoriaHTML = `
+            <label>
+            <select id="Filmescomedia"></select>
+            </label>
+            <br>
+            <button type="button" onclick="adicionarComedia()">Adicionar</button>
+`;
+        document.getElementById("mostrarcategoria").innerHTML = categoriaHTML;
+
+        const selectFilmescomedia = document.getElementById("Filmescomedia");
+        for (let i = 0; i < Filmescomedia.length; i++) {
+            const item = Filmescomedia[i];
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.textContent = item.nome;
+            selectFilmescomedia.appendChild(option);
+        }
+    }
+    if (categoriaSelecionada == "Drama") {
+        const categoriaHTML = `
+            <label>
+            <select id="Filmesdrama"></select>
+            </label>
+            <br>
+            <button type="button" onclick="adicionarDrama()">Adicionar</button>
+`;
+        document.getElementById("mostrarcategoria").innerHTML = categoriaHTML;
+
+        const selectFilmesdrama = document.getElementById("Filmesdrama");
+        for (let i = 0; i < Filmesdrama.length; i++) {
+            const item = Filmesdrama[i];
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.textContent = item.nome;
+            selectFilmesdrama.appendChild(option);
+        }
+    }
+    if (categoriaSelecionada == "Acao") {
+        const categoriaHTML = `
+            <label>
+            <select id="Filmesacao"></select>
+            </label>
+            <br>
+            <button type="button" onclick="adicionarAcao()">Adicionar</button>
+`;
+        document.getElementById("mostrarcategoria").innerHTML = categoriaHTML;
+
+        const selectFilmesacao = document.getElementById("Filmesacao");
+        for (let i = 0; i < Filmesacao.length; i++) {
+            const item = Filmesacao[i];
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.textContent = item.nome;
+            selectFilmesacao.appendChild(option);
+        }
+    }
+}
+
+
+
+
+preencherOpcoes();
+
+function procurarPorId(lista, idProcurado) {
+    for (let i = 0; i < lista.length; i++) {
+        if (lista[i].id === idProcurado) {
+            return lista[i];
+        }
+    }
+    return null;
+}
+
+function adicionarAssento() {
+    const letra = document.getElementById("letras").value;
+    const numero = document.getElementById("numeros").value;
+    const assento = letra + numero;
+
+    if (!assentosSelecionados.includes(assento)) {
+        assentosSelecionados.push(assento);
+    }
+    // Exibe os assentos selecionados em tempo real
+    const mostragemAssentos = document.getElementById("assentoMostrar");
+    if (mostragemAssentos) {
+        mostragemAssentos.textContent = assentosSelecionados.join(", ") || "Nenhum";
+    }
+}
+
+function adicionarIngresso() {
+    const ingressos = document.getElementById("ingressos").value;
+    const quantidadeIngressos = document.getElementById("quantidadeIngressos").value;
+
+    // Exibe os assentos selecionados em tempo real
+    const mostragemIngressos = document.getElementById("ingressoMostrar");
+    if (mostragemIngressos) {
+        mostragemIngressos.textContent = ingressosSelecionados.join(", ");
+    }
+    
+}
+function adicionarHorario() {
+    const horarioId = document.getElementById("horario").value;
+    const horario = document.getElementById("horario").value;
+    if (!horariosSelecionada.includes(horario)) {
+        horariosSelecionada.push(horario);
+    }
+    const mostragem = document.querySelector("horarioMostrar");
+    if (mostragem) {
+        mostragem.textContent = horario;
+    }
+}
+
+function gerarCarrinho() {
+
+    const categoriaSelecionada = document.getElementById("categoria").value;
+    
+
+    
+    const quantidadeComida = parseInt(document.getElementById("quantidadeComida").value);
+    const quantidadeBebida = parseInt(document.getElementById("quantidadeBebida").value);
+    const quantidadeCombo = parseInt(document.getElementById("quantidadeCombo").value);
+
+    let filmeSelecionado = "Nenhum";
+
+    if (categoriaSelecionada == "Terror") {
+        if (document.getElementById("Filmesterror")) {
+            filmeSelecionado = document.getElementById("Filmesterror").value;
+        }
+    } else if (categoriaSelecionada == "Aventura") {
+        if (document.getElementById("Filmesaventura")) {
+            filmeSelecionado = document.getElementById("Filmesaventura").value;
+        }
+    } else if (categoriaSelecionada == "Romance") {
+        if (document.getElementById("Filmesromance")) {
+            filmeSelecionado = document.getElementById("Filmesromance").value;
+        }
+    } else if (categoriaSelecionada == "Comedia") {
+        if (document.getElementById("Filmescomedia")) {
+            filmeSelecionado = document.getElementById("Filmescomedia").value;
+        }
+    } else if (categoriaSelecionada == "Drama") {
+        if (document.getElementById("Filmesdrama")) {
+            filmeSelecionado = document.getElementById("Filmesdrama").value;
+        }
+    } else if (categoriaSelecionada == "Acao") {
+        if (document.getElementById("Filmesacao")) {
+            filmeSelecionado = document.getElementById("Filmesacao").value;
+        }
+    }
+    var horarioSelecionado = document.getElementById("horario") ? document.getElementById("horario").value : "Nenhum";
+
+    
+    const valorComida = comidaSelecionada.preco * quantidadeComida;
+    const valorBebida = bebidaSelecionada.preco * quantidadeBebida;
+    const valorCombo = comboSelecionado.preco * quantidadeCombo;
+    const total = valorIngresso + valorComida + valorBebida + valorCombo;
+    const assentos = assentosSelecionados.length > 0 ? assentosSelecionados.join(", ") : "Nenhum";
+
+
+    const carrinhoHTML = `
+        <p><strong>Categoria:</strong> ${categoria}</p>
+        <p><strong>Filme:</strong> ${filmeSelecionado}</p>
+        <p><strong>Tipo(s) de Ingresso(s):</strong> ${ingressosSelecionada.id}</p>
+        <p><strong>Horário:</strong> ${horarioSelecionado}</p>
+        <p><strong>Quantidade de ingresso(s):</strong> ${quantidadeIngressos}</p>
+        <p><strong>Assento(s) Escolhido(s):</strong> ${assentos}</p>
+        <p><strong>Comida:</strong> ${comidaSelecionada.nome} (${quantidadeComida})</p>
+        <p><strong>Bebida:</strong> ${bebidaSelecionada.nome} (${quantidadeBebida})</p>
+        <p><strong>Combo:</strong> ${comboSelecionado.nome} (${quantidadeCombo})</p>
+        <p><strong>Total a pagar:</strong> R$ ${total.toFixed(2)}</p>
+`;
+    document.getElementById("carrinho").innerHTML = carrinhoHTML;
+}
+function total() {
+    const comidaId = document.getElementById("comida").value;
+    const bebidaId = document.getElementById("bebida").value;
+    const comboId = document.getElementById("combo").value;
+
+    var comidaSelecionada = procurarPorId(comida, comidaId);
+    var bebidaSelecionada = procurarPorId(bebida, bebidaId);
+    var comboSelecionado = procurarPorId(combo, comboId);
+
+    const valorIngresso = ingressosSelecionada.preco * quantidadeIngressos;
+    const valorComida = comidaSelecionada.preco * quantidadeComida;
+    const valorBebida = bebidaSelecionada.preco * quantidadeBebida;
+    const valorCombo = comboSelecionado.preco * quantidadeCombo;
+
+    const total = valorIngresso + valorComida + valorBebida + valorCombo;
+
+    const totalHTML = `
+        <p><strong>Total a pagar:</strong> R$ ${total.toFixed(2)}</p>
+    `;
+    document.getElementById("total").innerHTML = totalHTML;
+}
+
